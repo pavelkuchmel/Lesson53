@@ -5,13 +5,11 @@ body{
     border-width: 1px;
     height: 97vh;
 }
-
 .container{
     height: 100px;
     width: 100px;
     position: absolute;
 }
-
 #div1{
     position: absolute;
     width: 50px;

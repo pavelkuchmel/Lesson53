@@ -20,6 +20,11 @@ function rdmColor(){
     return 'rgb(' + rdmInt(0, 255) + ',' + rdmInt(0, 255) + ',' + rdmInt(0, 255) + ')';
 }
 
+function rdmDivPosition(){
+    div1.style.left = rdmInt(body.offsetWidth / 2, body.offsetWidth - div1.offsetWidth) + 'px';
+    div1.style.top = rdmInt(50, body.offsetHeight - 50) + 'px';
+}
+
 function checkDivPos (){
     for (let i in document.getElementsByClassName('container')) {
         let containerClientRect = document.documentElement.getElementsByClassName('container')[i].getBoundingClientRect();
@@ -35,10 +40,11 @@ function checkDivPos (){
                 break;
             }
             else{
-                div1.style.left = startingLeft;
+                /*div1.style.left = startingLeft;
                 div1.style.right = startingRight;
                 div1.style.top = startingTop;
-                div1.style.bottom = startingBottom;
+                div1.style.bottom = startingBottom;*/
+                rdmDivPosition();
                 break;
             }
         }
@@ -57,8 +63,15 @@ document.getElementById('container' + rdmInt(1, 3)).style.backgroundColor = colo
 container2.style.top = body.getClientRects()[0].bottom / 2 - container2.offsetHeight / 2 - Math.floor(body.getClientRects()[0].top) + 'px';
 container3.style.top = body.getClientRects()[0].bottom - container2.offsetHeight - Math.floor(body.getClientRects()[0].top) - 2 + 'px';
 
-div1.style.left = rdmInt(body.offsetWidth / 2, body.offsetWidth - div1.offsetWidth) + 'px';
-div1.style.top = rdmInt(50, body.offsetHeight - 50) + 'px';
+rdmDivPosition();
+
+/*div1.style.left = rdmInt(body.offsetWidth / 2, body.offsetWidth - div1.offsetWidth) + 'px';
+div1.style.top = rdmInt(50, body.offsetHeight - 50) + 'px';*/
+
+/*startingLeft = div1.style.left;
+startingTop = div1.style.top;
+startingBottom = div1.style.bottom;
+startingRight = div1.style.right;*/
 
 body.addEventListener('mouseup', function (){
     isDrag = false;
@@ -73,10 +86,10 @@ div1.addEventListener('mousedown', function (event){
     //console.log(xDiffInDiv);
     //console.log(yDiffInDiv);
     isDrag = true;
-    startingLeft = div1.style.left;
+    /*startingLeft = div1.style.left;
     startingTop = div1.style.top;
     startingBottom = div1.style.bottom;
-    startingRight = div1.style.right;
+    startingRight = div1.style.right;*/
     event.stopPropagation();
 });
 
