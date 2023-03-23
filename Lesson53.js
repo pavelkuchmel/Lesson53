@@ -63,7 +63,6 @@ div1.style.top = rdmInt(50, body.offsetHeight - 50) + 'px';
 body.addEventListener('mouseup', function (){
     isDrag = false;
     checkDivPos();
-    //console.log(isDrag);
 });
 
 div1.addEventListener('mousedown', function (event){
@@ -74,7 +73,6 @@ div1.addEventListener('mousedown', function (event){
     //console.log(xDiffInDiv);
     //console.log(yDiffInDiv);
     isDrag = true;
-    //console.log(isDrag);
     startingLeft = div1.style.left;
     startingTop = div1.style.top;
     startingBottom = div1.style.bottom;
