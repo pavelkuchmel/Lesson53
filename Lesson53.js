@@ -4,6 +4,12 @@ let container1 = document.getElementById('container1');
 let container2 = document.getElementById('container2');
 let container3 = document.getElementById('container3');
 let isDrag = false;
+let xDiffInDiv;
+let yDiffInDiv;
+let startingLeft;
+let startingTop;
+let startingBottom;
+let startingRight;
 let color;
 
 function rdmInt(min, max){
@@ -12,6 +18,31 @@ function rdmInt(min, max){
 
 function rdmColor(){
     return 'rgb(' + rdmInt(0, 255) + ',' + rdmInt(0, 255) + ',' + rdmInt(0, 255) + ')';
+}
+
+function checkDivPos (){
+    for (let i in document.getElementsByClassName('container')) {
+        let containerClientRect = document.documentElement.getElementsByClassName('container')[i].getBoundingClientRect();
+        let div1ClientRect = div1.getBoundingClientRect();
+        if (containerClientRect.left <= div1ClientRect.left &&
+            containerClientRect.top <= div1ClientRect.top &&
+            containerClientRect.bottom >= div1ClientRect.bottom &&
+            containerClientRect.right >= div1ClientRect.right
+        ){
+            if (document.getElementsByClassName('container')[i].style.backgroundColor === div1.style.backgroundColor) {
+                console.log(document.getElementsByClassName('container')[i])
+                window.location.reload();
+                break;
+            }
+            else{
+                div1.style.left = startingLeft;
+                div1.style.right = startingRight;
+                div1.style.top = startingTop;
+                div1.style.bottom = startingBottom;
+                break;
+            }
+        }
+    }
 }
 
 color = rdmColor();
@@ -23,26 +54,37 @@ container2.style.backgroundColor = rdmColor();
 container3.style.backgroundColor = rdmColor();
 document.getElementById('container' + rdmInt(1, 3)).style.backgroundColor = color;
 
-container2.style.top = body.getClientRects()[0].bottom / 2 - container2.offsetHeight / 2 - body.getClientRects()[0].top + 'px';
-container3.style.top = body.getClientRects()[0].bottom - container2.offsetHeight - body.getClientRects()[0].top + 'px';
+container2.style.top = body.getClientRects()[0].bottom / 2 - container2.offsetHeight / 2 - Math.floor(body.getClientRects()[0].top) + 'px';
+container3.style.top = body.getClientRects()[0].bottom - container2.offsetHeight - Math.floor(body.getClientRects()[0].top) - 2 + 'px';
 
 div1.style.left = rdmInt(body.offsetWidth / 2, body.offsetWidth - div1.offsetWidth) + 'px';
 div1.style.top = rdmInt(50, body.offsetHeight - 50) + 'px';
 
 body.addEventListener('mouseup', function (){
     isDrag = false;
-    console.log(isDrag);
+    checkDivPos();
+    //console.log(isDrag);
 });
 
 div1.addEventListener('mousedown', function (event){
+    if (!isDrag) {
+        xDiffInDiv = event.x - div1.getBoundingClientRect().left;
+        yDiffInDiv = event.y - div1.getBoundingClientRect().top;
+    }
+    //console.log(xDiffInDiv);
+    //console.log(yDiffInDiv);
     isDrag = true;
-    console.log(isDrag);
+    //console.log(isDrag);
+    startingLeft = div1.style.left;
+    startingTop = div1.style.top;
+    startingBottom = div1.style.bottom;
+    startingRight = div1.style.right;
     event.stopPropagation();
 });
 
 body.addEventListener('mousemove', function (event) {
     if (isDrag){
-        div1.style.left = event.x - body.getClientRects()[0].left - div1.offsetWidth / 2 + 'px';
-        div1.style.top = event.y - body.getClientRects()[0].top - div1.offsetHeight / 2 +'px';
+        div1.style.left = event.x - body.getClientRects()[0].left - xDiffInDiv + 'px';
+        div1.style.top = event.y - body.getClientRects()[0].top - yDiffInDiv + 'px';
     }
 });

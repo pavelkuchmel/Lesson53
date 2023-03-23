@@ -9,9 +9,6 @@ body{
     height: 100px;
     width: 100px;
     position: absolute;
-    border-color: gray;
-    border-width: 1px;
-    border-style: solid;
 }
 #div1{
     position: absolute;
