@@ -40,6 +40,7 @@ function checkDivPos (){
                 break;
             }
             else{
+
                 /*div1.style.left = startingLeft;
                 div1.style.right = startingRight;
                 div1.style.top = startingTop;
