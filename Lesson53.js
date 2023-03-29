@@ -74,12 +74,14 @@ startingTop = div1.style.top;
 startingBottom = div1.style.bottom;
 startingRight = div1.style.right;*/
 
-body.addEventListener('mouseup', function (){
+body.addEventListener('mouseup', function (event){
+    event.preventDefault();
     isDrag = false;
     checkDivPos();
 });
 
 div1.addEventListener('mousedown', function (event){
+    event.preventDefault();
     if (!isDrag) {
         xDiffInDiv = event.x - div1.getBoundingClientRect().left;
         yDiffInDiv = event.y - div1.getBoundingClientRect().top;
@@ -95,6 +97,7 @@ div1.addEventListener('mousedown', function (event){
 });
 
 body.addEventListener('mousemove', function (event) {
+    event.preventDefault();
     if (isDrag){
         div1.style.left = event.x - body.getClientRects()[0].left - xDiffInDiv + 'px';
         div1.style.top = event.y - body.getClientRects()[0].top - yDiffInDiv + 'px';
