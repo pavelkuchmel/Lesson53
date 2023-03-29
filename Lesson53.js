@@ -86,8 +86,6 @@ div1.addEventListener('mousedown', function (event){
         xDiffInDiv = event.x - div1.getBoundingClientRect().left;
         yDiffInDiv = event.y - div1.getBoundingClientRect().top;
     }
-    //console.log(xDiffInDiv);
-    //console.log(yDiffInDiv);
     isDrag = true;
     /*startingLeft = div1.style.left;
     startingTop = div1.style.top;
